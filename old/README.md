@@ -1,6 +1,6 @@
-# new
+# keepr
 
-> A Vue.js project
+> Vue DotNet
 
 ## Build Setup
 

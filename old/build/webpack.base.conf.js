@@ -1,5 +1,4 @@
 var path = require('path')
-var fs = require('fs')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
@@ -24,8 +23,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-    },
-    symlinks: false
+    }
   },
   module: {
     rules: [
@@ -37,12 +35,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [
-          resolve('src'),
-          resolve('test'),
-          resolve('./src'),
-          resolve('./node_modules/vuetify')
-        ]
+        include: [resolve('src'), resolve('test')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -67,12 +60,6 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
-    ],
-    loaders: [
-      {
-        test: /\.styl$/,
-        loader: ['css-loader', 'stylus-loader'],
       }
     ]
   }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -26,6 +26,7 @@ namespace keepr.Controllers
         }
 
         // POST api/values
+        [Authorize]
         [HttpPost]
         public void Post([FromBody]string value)
         {
