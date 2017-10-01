@@ -54,7 +54,7 @@
             return {
                 login: false,
                 register: false,
-                e1: false,
+                e1: true,
                 name: '',
                 email: '',
                 password: '',

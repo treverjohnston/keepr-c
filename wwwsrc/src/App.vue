@@ -2,7 +2,14 @@
   <v-app light>
     <v-toolbar fixed>
       <router-link :to="'/'">
-        <v-icon>home</v-icon>
+      <v-btn icon light>
+          <v-icon>home</v-icon>
+        </v-btn>
+      </router-link>
+      <router-link :to="'/profile'">
+      <v-btn icon light>
+          <v-icon>perm_identity</v-icon>
+        </v-btn>
       </router-link>
       <v-btn icon light @click.stop="fixed = !fixed">
         <v-icon>remove</v-icon>
@@ -44,9 +51,17 @@
         title: 'Keepr'
       }
     },
-    components:{
+    components: {
       Login
+    },
+    mounted(){
+      this.$store.dispatch('getAuth')
     }
   }
 
 </script>
+<style>
+  a{
+    text-decoration: none;
+  }
+</style>

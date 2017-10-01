@@ -113,15 +113,40 @@ var store = new vuex.Store({
                 views: 78
             }
         ],
-        current: {}
+        current: {},
+        userInfo: {}
     },
     mutations: {
         setZoom(state, item){
             state.current = item;
             // console.log(state.current)
-        }
+        },
+        
+		handleError(state, err) {
+			state.error = err
+        },
+        
+		setInfo(state, obj) {
+			console.log('info', obj)
+			state.userInfo = obj
+		},
     },
-    actions: {}
+    actions: {
+        getAuth({ commit, dispatch }) {
+			auth('account')
+				.then(res => {
+					if (!res.data.data) {
+						return router.push('/')
+					}
+					commit('setInfo', res.data.data)
+					router.push('home')
+				})
+				.catch(err => {
+					commit('handleError', err)
+					router.push('/')
+				})
+		}
+    }
 })
 
 function CreateAccountExample() {
