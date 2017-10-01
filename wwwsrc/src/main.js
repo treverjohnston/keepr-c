@@ -6,7 +6,9 @@ import './stylus/main.styl'
 import App from './App'
 import router from './router'
 import store from './store'
+import VueMasonryPlugin from 'vue-masonry'
 
+Vue.use(VueMasonryPlugin)
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 
@@ -14,11 +16,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  data() {
-    return {
-      store
-    }
-  },
+  store,
   template: '<App/>',
   components: { App }
 })

@@ -12,8 +12,115 @@ let api = axios.create({
 vue.use(vuex)
 
 var store = new vuex.Store({
-    state: {},
-    mutations: {},
+    state: {
+        dummy: [
+            {
+                url: "https://placebear.com/400/400",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 32
+            },
+            {
+                url: "https://placebear.com/600/1300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "what", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/200/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "large", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/1600/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/800/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/900/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/500/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/7600/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/8800/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/900/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/200/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/200/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/200/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            },
+            {
+                url: "https://placebear.com/500/300",
+                author: "t-swizzle",
+                keeps: 35,
+                tags: ["cool", "neat-o", "cat"],
+                views: 78
+            }
+        ],
+        current: {}
+    },
+    mutations: {
+        setZoom(state, item){
+            state.current = item;
+            // console.log(state.current)
+        }
+    },
     actions: {}
 })
 
@@ -45,3 +152,4 @@ function getAuth() {
 // loginAndGetDataExample()
 getAuth()
 
+export default store
