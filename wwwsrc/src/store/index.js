@@ -22,7 +22,7 @@ var store = new vuex.Store({
                 views: 32
             },
             {
-                url: "https://placebear.com/600/1300",
+                url: "https://placebear.com/600/700",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "what", "cat"],
@@ -36,21 +36,21 @@ var store = new vuex.Store({
                 views: 78
             },
             {
-                url: "https://placebear.com/1600/300",
+                url: "https://placebear.com/1600/1300",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/800/300",
+                url: "https://placebear.com/800/700",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/900/300",
+                url: "https://placebear.com/900/700",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
@@ -64,21 +64,21 @@ var store = new vuex.Store({
                 views: 78
             },
             {
-                url: "https://placebear.com/7600/300",
+                url: "https://placebear.com/600/600",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/8800/300",
+                url: "https://placebear.com/800/800",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/900/300",
+                url: "https://placebear.com/900/900",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
@@ -114,7 +114,13 @@ var store = new vuex.Store({
             }
         ],
         current: {},
-        userInfo: {}
+        userInfo: {},
+        dummyVaults: {
+
+        },
+        dummyKeeps: {
+
+        }
     },
     mutations: {
         setZoom(state, item){
@@ -129,7 +135,10 @@ var store = new vuex.Store({
 		setInfo(state, obj) {
 			console.log('info', obj)
 			state.userInfo = obj
-		},
+        },
+        addToKeeps(state, obj){
+            vue.set(state.dummyKeeps, obj.vault, obj)
+        }
     },
     actions: {
         getAuth({ commit, dispatch }) {
@@ -145,7 +154,10 @@ var store = new vuex.Store({
 					commit('handleError', err)
 					router.push('/')
 				})
-		}
+        },
+        viewPlus({commit, dispatch}){
+            console.log("add a plus view function")
+        }
     }
 })
 

@@ -1,33 +1,27 @@
 <template>
-    <div class="zoom">
+    <div class="keepcheck">
         <!-- <v-layout class="elevation-24"> -->
-            <v-card>
+        <v-card>
             <v-flex xs12>
                 <img :src="item.url" class="img img-responsive">
             </v-flex>
             <v-flex xs12>
                 <v-card-title primary-title class="text-xs-center">
-                    <h3 class="headline mb-0">{{item.author}}</h3>
+                    <h3 class="headline mb-0">What vault do you want to keep this in?</h3>
                 </v-card-title>
                 <v-card-title primary-title class="text-xs-center">
-                    <div v-for="tag in item.tags">
+                    <div v-for="vault in user.vaults">
                         <v-flex xs12>
-                            <p class="tag">{{tag}}</p>
+                            <p class="vault">{{vault}}</p>
                         </v-flex>
                     </div>
+                    <v-card-actions>
+                        <v-btn icon>
+                            <v-icon>library_add</v-icon>
+                            <p>Add a new vault</p>
+                        </v-btn>
+                    </v-card-actions>
                 </v-card-title>
-                <v-card-actions>
-                    <v-btn icon>
-                        <v-icon>library_add</v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                        <v-icon>share</v-icon>
-                    </v-btn>
-                    <v-icon small>play_for_work</v-icon>
-                    <p>{{item.keeps}}</p>
-                    <v-icon small>visibility</v-icon>
-                    <p>{{item.views}}</p>
-                </v-card-actions>
             </v-flex>
         </v-card>
         <!-- </v-layout> -->
@@ -36,7 +30,7 @@
 
 <script>
     export default {
-        name: 'zoom',
+        name: 'keepcheck',
         data() {
             return {
             }
@@ -46,18 +40,16 @@
         computed: {
             item() {
                 return this.$store.state.current;
+            },
+            user() {
+                return this.$store.state.info;
             }
         },
         methods: {
         }
     }
-
 </script>
 <style scoped>
-    .tag {
-        margin-right: 1rem;
-    }
-
     .img {
         width: 100%;
         /* height: 100%; */

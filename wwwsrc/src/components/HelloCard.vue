@@ -1,16 +1,19 @@
 <template>
   <div class="hellocard">
     <v-card hover @click="setZoom(item)">
-        <router-link :to="`zoom`">
       <img :src="item.url" class="media">
-    </router-link>    
       <v-card-title>
         <div>
           <p class="grey--text">{{item.author}}</p>
         </div>
         <v-spacer></v-spacer>
-        <v-icon small>play_for_work</v-icon>
-        <p>{{item.keeps}}</p>
+        <v-dialog v-model="dialog2" lazy absolute>
+          <v-btn primary @click="setKeep(item)" dark slot="activator">
+            <v-icon>play_for_work</v-icon>
+            <p>{{item.keeps}}</p>
+          </v-btn>
+          <keepcheck></keepcheck>
+        </v-dialog>
         <v-icon small>visibility</v-icon>
         <p>{{item.views}}</p>
       </v-card-title>
@@ -23,9 +26,12 @@
       </v-slide-y-transition>
       <v-card-actions class="white">
         <v-spacer></v-spacer>
-        <v-btn icon @click="redraw">
-            <v-icon>{{ show ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</v-icon>
+        <v-dialog v-model="dialog" lazy absolute>
+          <v-btn primary @click="setZoom(item)" dark slot="activator" icon>
+            <v-icon>launch</v-icon>
           </v-btn>
+          <zoom></zoom>
+        </v-dialog>
         <v-btn icon>
           <v-icon>library_add</v-icon>
         </v-btn>
@@ -38,13 +44,17 @@
 </template>
 
 <script>
+  import Zoom from './Zoom'
+  import Keepcheck from './KeepCheck'
   export default {
     name: 'hellocard',
     props: ["item"],
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
-        show: false
+        show: false,
+        dialog: '',
+        dialog2: ''
       }
     },
     methods: {
@@ -52,11 +62,19 @@
         this.show = !this.show
         this.$redrawVueMasonry();
       },
-      setZoom(item){
+      setZoom(item) {
+        this.$store.commit('setZoom', item)
+        this.$store.dispatch('viewPlus', item)
+      },
+      setKeep(item){
         this.$store.commit('setZoom', item)
       }
     },
     mounted() {
+    },
+    components: {
+      Zoom,
+      Keepcheck
     }
   }
 
@@ -67,7 +85,8 @@
   .media {
     /* padding-top: 15rem; */
     width: 100%;
-    min-height: 5rem;
+    min-height: 15rem;
+    min-width: 13rem;
     max-height: 30rem;
   }
 

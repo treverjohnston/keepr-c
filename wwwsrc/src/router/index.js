@@ -5,6 +5,7 @@ import HelloCard from '@/components/HelloCard'
 import Zoom from '@/components/Zoom'
 import Login from '@/components/Login'
 import Profile from '@/components/Profile'
+import KeepCheck from '@/components/KeepCheck'
 
 Vue.use(Router)
 
@@ -14,6 +15,11 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/keepcheck',
+      name: 'KeepCheck',
+      component: KeepCheck
     },
     {
       path: '/profile',
