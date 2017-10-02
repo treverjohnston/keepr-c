@@ -11,11 +11,10 @@ namespace keepr
         new DbSet<User> Users { get; set; }
 
         // FOR EACH NEW MODEL INPUT A DBSET LIKE BELOW
-        DbSet<Keep> Keeps { get; set; }
+        public DbSet<Keep> Keeps { get; set; }
+        public DbSet<Vault> Vaults { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // TODO
-            // change database name
             optionsBuilder.UseSqlServer("Server=studentprojects.database.windows.net;Database=treversKeeps;User ID=codeworks@studentprojects;Password=Applejuic3;Trusted_Connection=False;Encrypt=True");
         }
         public KeeprContext(DbContextOptions<KeeprContext> options) : base(options)

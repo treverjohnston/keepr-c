@@ -1,9 +1,10 @@
 <template>
     <div class="login">
-        <div v-if="loggedIn">
+        <div v-if="logged">
             <v-container fluid>
                 <v-flex xs12>
                     <p>Add New Keep/Vault</p>
+                    <v-btn @click="logout">Logout</v-btn>
                 </v-flex>
             </v-container>
         </div>
@@ -34,7 +35,7 @@
                                 :append-icon="e1 ? 'visibility' : 'visibility_off'" :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'"
                                 counter></v-text-field>
                         </v-flex>
-                        <v-btn>Continue</v-btn>
+                        <v-btn @click="registering">Continue</v-btn>
                     </v-layout>
                 </v-container>
             </v-card>
@@ -48,7 +49,7 @@
                             <v-text-field name="input-10-1" label="Enter your password" hint="At least 8 characters" v-model="password" min="8" :append-icon="e1 ? 'visibility' : 'visibility_off'"
                                 :append-icon-cb="() => (e1 = !e1)" :type="e1 ? 'password' : 'text'" counter></v-text-field>
                         </v-flex>
-                        <v-btn>Continue</v-btn>
+                        <v-btn @click="logging">Continue</v-btn>
                     </v-layout>
                 </v-container>
             </v-card>
@@ -74,8 +75,31 @@
         components: {
         },
         computed: {
+            logged(){
+                return this.$store.state.loggedIn
+            }
         },
         methods: {
+            logging(){
+                var obj = {
+                    email: this.email,
+                    password: this.password
+                }
+                this.$store.dispatch('login', obj)
+            },
+            registering(){
+                console.log("attempting")
+                var obj = {
+                    email: this.email,
+                    name: this.name,
+                    password: this.password,
+                    confirmPassword: this.confirmPassword
+                }
+                this.$store.dispatch('createAccount', obj)
+            },
+            logout(){
+                this.$store.dispatch('logout')
+            }
         },
         mounted() {
         }

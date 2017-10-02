@@ -1,6 +1,11 @@
 <template>
     <div class="profile">
-        hello world
+        <div v-if="loggedIn">
+{{vaults}}
+        </div>
+        <div v-else>
+<h1>Need to log in first</h1>
+        </div>
     </div>
 </template>
 
@@ -17,6 +22,12 @@
             info() {
                 return this.$store.state.userInfo
             },
+            vaults(){
+                return this.$store.state.userInfo.myVaults
+            },
+            loggedIn(){
+                return this.$store.state.loggedIn
+            }
         },
         methods: {
         },

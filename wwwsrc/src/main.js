@@ -7,6 +7,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import VueMasonryPlugin from 'vue-masonry'
+import swal from 'sweetalert'
 
 Vue.use(VueMasonryPlugin)
 Vue.use(Vuetify)

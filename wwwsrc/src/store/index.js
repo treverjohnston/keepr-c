@@ -15,98 +15,98 @@ var store = new vuex.Store({
     state: {
         dummy: [
             {
-                url: "https://placebear.com/400/400",
+                url: "https://loremFlickr.com/400/400/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 32
             },
             {
-                url: "https://placebear.com/600/700",
+                url: "https://loremFlickr.com/600/700/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "what", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/200/300",
+                url: "https://loremFlickr.com/200/300/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "large", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/1600/1300",
+                url: "https://loremFlickr.com/1600/1300/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/800/700",
+                url: "https://loremFlickr.com/800/700/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/900/700",
+                url: "https://loremFlickr.com/900/700/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/500/300",
+                url: "https://loremFlickr.com/500/300/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/600/600",
+                url: "https://loremFlickr.com/600/600/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/800/800",
+                url: "https://loremFlickr.com/800/800/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/900/900",
+                url: "https://loremFlickr.com/900/900/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/200/300",
+                url: "https://loremFlickr.com/200/300/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/200/300",
+                url: "https://loremFlickr.com/200/300/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/200/300",
+                url: "https://loremFlickr.com/200/300/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
                 views: 78
             },
             {
-                url: "https://placebear.com/500/300",
+                url: "https://loremFlickr.com/500/300/dog",
                 author: "t-swizzle",
                 keeps: 35,
                 tags: ["cool", "neat-o", "cat"],
@@ -120,7 +120,8 @@ var store = new vuex.Store({
         },
         dummyKeeps: {
 
-        }
+        },
+        loggedIn: false
     },
     mutations: {
         setZoom(state, item){
@@ -133,22 +134,33 @@ var store = new vuex.Store({
         },
         
 		setInfo(state, obj) {
-			console.log('info', obj)
+			console.log('infocommit', obj)
 			state.userInfo = obj
         },
         addToKeeps(state, obj){
             vue.set(state.dummyKeeps, obj.vault, obj)
+        },
+        setLogged(state){
+            state.loggedIn = !state.loggedIn
         }
     },
     actions: {
+        addVault({commit, dispatch}, obj){
+            api.post('Vaults', obj)
+            .then(res=>{
+                dispatch(getAuth)
+                console.log(res)
+            })
+        },
         getAuth({ commit, dispatch }) {
-			auth('account')
+			api('account')
 				.then(res => {
-					if (!res.data.data) {
+                    console.log("info", res)
+					if (!res.data) {
 						return router.push('/')
 					}
-					commit('setInfo', res.data.data)
-					router.push('home')
+                    commit('setInfo', res.data)
+                    commit('setLogged')
 				})
 				.catch(err => {
 					commit('handleError', err)
@@ -157,6 +169,49 @@ var store = new vuex.Store({
         },
         viewPlus({commit, dispatch}){
             console.log("add a plus view function")
+        },
+        createAccount({commit, dispatch}, obj){
+            api.post('account', obj)
+            .then(res => {
+                swal({
+                    title: 'Account Created',
+                    timer: 2000
+                }).then(
+                    function () { },
+                    // handling the promise rejection
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                            console.log('I was closed by the timer')
+                        }
+                    })
+                console.log(res)
+            })
+        },
+        login({commit, dispatch}, obj){
+            api.post('account/login', obj)
+            .then(res => {
+                swal({
+                    title: 'Logged in as',
+                    text: res.data.username,
+                    timer: 2000
+                }).then(
+                    function () { },
+                    // handling the promise rejection
+                    function (dismiss) {
+                        if (dismiss === 'timer') {
+                            console.log('I was closed by the timer')
+                        }
+                    })
+                    commit('setLogged')                    
+                console.log(res)
+            })
+        },
+        logout({commit, dispatch}){
+            api.delete('account/logout')
+            .then(res=>{
+                console.log(res)
+                commit('setLogged')                
+            })            
         }
     }
 })
@@ -187,6 +242,6 @@ function getAuth() {
 }
 
 // loginAndGetDataExample()
-getAuth()
+// getAuth()
 
 export default store

@@ -86,7 +86,7 @@
     /* padding-top: 15rem; */
     width: 100%;
     min-height: 15rem;
-    min-width: 13rem;
+    /* min-width: 13rem; */
     max-height: 30rem;
   }
 
