@@ -11,6 +11,7 @@ namespace keepr.Models
         public string ImgUrl { get; set; }
         
         public List<Keep> Keeps {get; set;}
+        public List<Owner> Owners {get; set;}
         [Required]
         public string UserId { get; set; }
     }

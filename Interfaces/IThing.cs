@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using keepr.Models;
+
 namespace keepr
 {
     public interface IThing
@@ -6,6 +9,7 @@ namespace keepr
         string Title { get; set; }
         string Description { get; set; }
         string ImgUrl { get; set; }
+        
 
         string UserId { get; set; }
     }

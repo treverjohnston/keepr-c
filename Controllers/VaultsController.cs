@@ -38,9 +38,14 @@ namespace keepr.Controllers
         [HttpPost]
         public IEnumerable<Vault> Post([FromBody]Vault value)
         {
+            // add owners
+            value.Owners.Add(value.UserId);
             _db.Vaults.Add(value);
-            var user =_db.Users.Find(value.Id);
+            var user =_db.Users.Find(value.UserId);
+            // _db.user.MyVaults.Add(value);
+
             user.MyVaults.Add(value);
+            // user.MyVaults.Add(value);
             _db.SaveChanges();
             return _db.Vaults;
         }

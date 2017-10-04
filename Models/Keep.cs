@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace keepr.Models
@@ -8,6 +9,8 @@ namespace keepr.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImgUrl { get; set; }
+        public List<Owner> Owners { get; set; }
+
         [Required]
         public string UserId { get; set; }
     }
